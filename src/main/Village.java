@@ -4,12 +4,12 @@ public class Village {
 
 	public static void main(String[] args) {
 
-		Villager spot = new Dog();
-		Villager blue = new Bird();
-		blue.move();
-		blue.talk();
-		spot.move();
-		spot.talk();
+		
+		Villager tom = new Dog("Tom", 10, null, 6000);
+		
+		tom.reportMoney();
+		tom.buildHouse("Main", 5000, 5783);
+		tom.reportMoney();
 	}
 
 }
