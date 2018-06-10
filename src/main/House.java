@@ -14,6 +14,11 @@ public class House {
 		this.cost = cost;
 	}
 	
-	
+	public void reportStats() {
+		System.out.println("location: "+street);
+		System.out.println("size: "+size);
+		System.out.println("Owner: " +owner.name);
+		System.out.println("cost: "+cost);
+	}
 
 }

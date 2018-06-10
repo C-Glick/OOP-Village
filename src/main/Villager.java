@@ -7,11 +7,11 @@ public abstract class Villager{
 	House house;
 	int money;
 
-	public Villager(String name, int age, House house, int money) {
+	public Villager(String name, int age, int money) {
 		super();
 		this.name = name;
 		this.age = age;
-		this.house = house;
+		this.house = new House ("Bus Station", 0, this, 0); 	//default house
 		this.money = money;
 	}
 	

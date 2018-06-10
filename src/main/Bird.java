@@ -2,8 +2,8 @@ package main;
 
 public class Bird extends Villager{
 	
-	public Bird(String name, int age, House house, int money) {
-		super(name, age, house, money);
+	public Bird(String name, int age, int money) {
+		super(name, age, money);
 	}
 
 	public void move() {

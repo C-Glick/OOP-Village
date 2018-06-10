@@ -2,8 +2,8 @@ package main;
 
 public class Dog extends Villager implements Runable{
 
-	public Dog(String name, int age, House house, int money) {
-		super(name, age, house, money);
+	public Dog(String name, int age, int money) {
+		super(name, age, money);
 	}
 
 	public void move() {
