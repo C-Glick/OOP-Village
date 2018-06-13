@@ -1,4 +1,4 @@
-package main;
+	package main;
 
 public abstract class Villager{
 	
@@ -41,5 +41,19 @@ public abstract class Villager{
 	
 	public void reportMoney() {
 		System.out.println(this.name+" has $"+this.money);
+	}
+	public void moveHouse(String newStreet) {
+		this.house.street = newStreet;
+	}
+	public void pay (Villager reciver, int amount) {
+		if (amount <= this.money) {
+			this.money = this.money-amount;
+			reciver.money = reciver.money + amount;
+			System.out.println(this.name + " payed "+ reciver.name +" $"+amount);
+		}
+		else{
+			System.out.println(this.name +"does not have enough money to pay "+reciver.name+" $"+amount);
+			this.reportMoney();
+		}
 	}
 }

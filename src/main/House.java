@@ -20,5 +20,6 @@ public class House {
 		System.out.println("Owner: " +owner.name);
 		System.out.println("cost: "+cost);
 	}
+	
 
 }
