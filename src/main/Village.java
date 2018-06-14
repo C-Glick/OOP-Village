@@ -1,8 +1,8 @@
 package main;
 
 public class Village {
-	String name = "Oakheart";
-	String state = "IA";
+	String name;
+	String state;
 
 	public Village(String name, String state) {
 		super();
@@ -19,13 +19,16 @@ public class Village {
 		
 		Mayor mayor = new Mayor(becky, 1, 100000, oakheart);
 		
+		mayor.reportStats();
+	
+		
 		tom.reportMoney();
 		//tom.buildHouse("Main", 5000, 5783);
 		tom.reportMoney();
 		
 		becky.buildHouse("1st", 8000, 7000);
 		tom.house.reportStats();
-		becky.house.reportStats();
-	}
+		mayor.getMayor().house.reportStats();	
+		}
 
 }
