@@ -11,7 +11,10 @@ public class Village {
 	}
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		Clock clock= new Clock();
+		clock.start();
+		
 		Village oakheart = new Village("OakHeart","IA");
 		
 		Villager becky = new Dog("Becky",30, 10000);
@@ -29,6 +32,10 @@ public class Village {
 		becky.buildHouse("1st", 8000, 7000);
 		tom.house.reportStats();
 		mayor.getMayor().house.reportStats();	
+		
+		clock.printTime();
+		Thread.sleep(5000);
+		clock.printTime();
 		}
 
 }
