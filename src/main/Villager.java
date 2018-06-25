@@ -14,7 +14,7 @@ public abstract class Villager{
 		this.house = new House ("Bus Station", 0, this, 0); 	//default house
 		this.money = money;
 	}
-	
+
 	public abstract void move();
 	public abstract void talk();
 	

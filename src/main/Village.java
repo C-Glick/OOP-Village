@@ -13,7 +13,9 @@ public class Village {
 	
 	public static void main(String[] args) throws InterruptedException {
 		Clock clock= new Clock();
+		UserInterface ui= new UserInterface();
 		clock.start();
+		ui.start();
 		
 		Village oakheart = new Village("OakHeart","IA");
 		
@@ -22,9 +24,9 @@ public class Village {
 		
 		Mayor mayor = new Mayor(becky, 1, 100000, oakheart);
 		
+		
 		mayor.reportStats();
 	
-		
 		tom.reportMoney();
 		//tom.buildHouse("Main", 5000, 5783);
 		tom.reportMoney();
@@ -33,9 +35,5 @@ public class Village {
 		tom.house.reportStats();
 		mayor.getMayor().house.reportStats();	
 		
-		clock.printTime();
-		Thread.sleep(5000);
-		clock.printTime();
-		}
-
+	}
 }
