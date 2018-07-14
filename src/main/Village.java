@@ -3,11 +3,13 @@ package main;
 public class Village {
 	String name;
 	String state;
+	Clock worldClock;
 
-	public Village(String name, String state) {
+	public Village(String name, String state, Clock worldClock) {
 		super();
 		this.name = name;
 		this.state = state;
+		this.worldClock = worldClock;
 	}
 
 	
@@ -17,7 +19,7 @@ public class Village {
 		clock.start();
 		ui.start();
 		
-		Village oakheart = new Village("OakHeart","IA");
+		Village oakheart = new Village("OakHeart","IA",clock);
 		
 		Villager becky = new Dog("Becky",30, 10000);
 		Villager tom = new Dog("Tom", 10, 6000);
@@ -34,6 +36,6 @@ public class Village {
 		becky.buildHouse("1st", 8000, 7000);
 		tom.house.reportStats();
 		mayor.getMayor().house.reportStats();	
-		
+		oakheart.worldClock.printTime();
 	}
 }
