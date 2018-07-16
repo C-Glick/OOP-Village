@@ -13,8 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 
@@ -25,7 +27,8 @@ public JFrame frame;
 public JTextPane console;
 public JTextField input;
 public JScrollPane scrollpane;
-public StyledDocument document;
+public DefaultStyledDocument document;
+public StyleContext sc;
 
 boolean trace = false;
 
@@ -53,17 +56,19 @@ boolean trace = false;
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-		console = new JTextPane();
-		console.setEnabled(false);
+		sc = new StyleContext();
+		document = new DefaultStyledDocument();
+		
+		console = new JTextPane(document);
+		console.setEditable(false);
 		console.setFont(new Font("Courier New", Font.PLAIN,12));
 		console.setOpaque(false);
 		
-		document = console.getStyledDocument();
 		
 		input = new JTextField();
 		input.setFont(new Font("Courier New", Font.PLAIN,12));
-		//input.setCaretColor(Color.WHITE);
-		//input.setForeground(Color.WHITE);
+		input.setCaretColor(Color.WHITE);
+		input.setForeground(Color.WHITE);
 		input.setOpaque(false);
 		
 		input.addActionListener(new ActionListener()
@@ -94,7 +99,7 @@ boolean trace = false;
 		frame.add(input, BorderLayout.SOUTH);
 		frame.add(scrollpane, BorderLayout.CENTER);
 		frame.setSize(660, 350);
-	//	frame.getContentPane().setBackground(new Color(50, 50, 50));
+		frame.getContentPane().setBackground(new Color(50, 50, 50));
 		frame.setLocationRelativeTo(null);
 		
 		
@@ -113,17 +118,31 @@ boolean trace = false;
 					break;
 				case "trace": toggleTrace();
 					break;
-				default : print(s, false);
+				default : print(s, false,Color.YELLOW);
 					break;
 				}
 			}
 			else if (commands.length==2) {
+				switch (commands[0]) {
+				case "findVillager":
+					Villager villager = findVillager(commands[1]);
+					if(villager ==null) {
+						print("Error, Villager not found",false,Color.RED);
+						break;
+					}
+					else{
+						print ("found Villager: "+ villager.name);
+						break;
+					}
+				default:print(s,false,Color.YELLOW);
+					break;
+				}
 				
 			}
 			
 		}
 		catch(Exception ex){
-			print("Error -> "+ex.getMessage(), true);
+			print("Error -> "+ex.getMessage(), true, Color.RED);
 		}
 	}
 	public void scrollTop() {
@@ -139,8 +158,9 @@ boolean trace = false;
 		print(s,trace,new Color(255,255,255));
 	}
 	public void print (String s, boolean trace, Color c) {
-		Style style = console.addStyle("Style", null);
-		StyleConstants.setForeground(style, c);	
+        final Style style = sc.addStyle("Style", null);
+        style.addAttribute(StyleConstants.Foreground, c);
+
 		
 		if (trace|| this.trace) {
 			Throwable t = new Throwable();
@@ -151,8 +171,9 @@ boolean trace = false;
 		}
 		
 		try {
-			document.insertString(document.getLength(), s+"\n", style);
-			
+			document.insertString(document.getLength(), s+"\n", null);		
+            document.setParagraphAttributes(document.getLength()-1, 1, style, false);
+
 		}
 		catch (Exception ex) {
 		}
@@ -181,5 +202,16 @@ boolean trace = false;
 						+ "'help' brings up this document \n"
 						+ "'printTime' prints the current time of the program to console \n";
 		print(helpText, false);
+	}
+	public Villager findVillager(String s) {
+		Villager result= null;
+		
+		for (int i=0; i<Village.villagerList.size();i++) {
+			if (Village.villagerList.get(i).name.equalsIgnoreCase(s)) {
+				result= Village.villagerList.get(i);
+				break;
+			}
+		}
+		return result;
 	}
 }

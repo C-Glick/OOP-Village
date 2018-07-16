@@ -7,6 +7,7 @@ import java.util.List;
 public class Village {
 	String name;
 	String state;
+	static Mayor mayor;
 	static Clock worldClock;
 	static List<Villager> villagerList;
 	static UserInterface ui;
@@ -25,17 +26,15 @@ public class Village {
 		clock.start();
 		worldClock=clock;
 		ui.start();
-		
+		villagerList = new ArrayList<>();
 		
 		Thread.sleep(500);
 		
-		villagerList = new ArrayList<>();
 		
-		Villager becky = new Dog("Becky",30, 10000);
+		Villager becky = new Dog("Becky",30, 1000);
 		Villager tom = new Dog("Tom", 10, 6000);
 		
-		Mayor mayor = new Mayor(becky, 1, 100000, oakheart);
-		
+		Mayor mayorBecky = new Mayor(becky, 1, 100000, oakheart);
 		
 		mayor.reportStats();
 	

@@ -12,6 +12,7 @@ public class Mayor {
 		this.yearsInOffice = yearsInOffice;
 		this.budget = budget;
 		this.town = town;
+		Village.mayor = this;
 	}
 	public void reportStats() {
 		System.out.println("Villager: "+villager.name);
