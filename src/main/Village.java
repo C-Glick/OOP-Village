@@ -1,25 +1,35 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Village {
 	String name;
 	String state;
-	Clock worldClock;
+	static Clock worldClock;
+	static List<Villager> villagerList;
+	static UserInterface ui;
 
-	public Village(String name, String state, Clock worldClock) {
+	public Village(String name, String state) {
 		super();
 		this.name = name;
 		this.state = state;
-		this.worldClock = worldClock;
 	}
 
 	
 	public static void main(String[] args) throws InterruptedException {
-		Clock clock= new Clock();
-		UserInterface ui= new UserInterface();
+		Village oakheart = new Village("OakHeart","IA");
+		Clock clock= new Clock(oakheart);
+		ui= new UserInterface(oakheart);
 		clock.start();
+		worldClock=clock;
 		ui.start();
 		
-		Village oakheart = new Village("OakHeart","IA",clock);
+		
+		Thread.sleep(500);
+		
+		villagerList = new ArrayList<>();
 		
 		Villager becky = new Dog("Becky",30, 10000);
 		Villager tom = new Dog("Tom", 10, 6000);
@@ -30,7 +40,7 @@ public class Village {
 		mayor.reportStats();
 	
 		tom.reportMoney();
-		//tom.buildHouse("Main", 5000, 5783);
+		tom.buildHouse("Main", 5000, 5783);
 		tom.reportMoney();
 		
 		becky.buildHouse("1st", 8000, 7000);

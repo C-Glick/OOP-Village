@@ -13,34 +13,35 @@ public abstract class Villager{
 		this.age = age;
 		this.house = new House ("Bus Station", 0, this, 0); 	//default house
 		this.money = money;
+		Village.villagerList.add(this);
 	}
 
 	public abstract void move();
 	public abstract void talk();
 	
 	public void sleep() {
-		System.out.println("Sleeping...");
+		Village.ui.print("Sleeping...");
 	}
 	
 	public void eat(){
-		System.out.println("Eating...");
-	}
+		Village.ui.print("Eating...");
+		}
 	
 	public void buildHouse(String street, int size, int cost) {
 		if(this.money>=cost) {
 			this.house= new House(street, size, this, cost);
-			System.out.println(this.name+" built a house on "+street+" Street for $"+cost+", it is "+size+" square ft.");	
+			Village.ui.print(this.name+" built a house on "+street+" Street for $"+cost+", it is "+size+" square ft.");	
 			this.money=this.money-this.house.cost;
 		}else {
-			System.out.println(this.name+" does not have enough money to build this house.");
+			Village.ui.print(this.name+" does not have enough money to build this house.");
 			this.reportMoney();
-			System.out.println("House cost: $"+cost);
+			Village.ui.print("House cost: $"+cost);
 		}
 	
 	}
 	
 	public void reportMoney() {
-		System.out.println(this.name+" has $"+this.money);
+		Village.ui.print(this.name+" has $"+this.money);
 	}
 	public void moveHouse(String newStreet) {
 		this.house.street = newStreet;
@@ -49,10 +50,10 @@ public abstract class Villager{
 		if (amount <= this.money) {
 			this.money = this.money-amount;
 			reciver.money = reciver.money + amount;
-			System.out.println(this.name + " payed "+ reciver.name +" $"+amount);
+			Village.ui.print(this.name + " payed "+ reciver.name +" $"+amount);
 		}
 		else{
-			System.out.println(this.name +"does not have enough money to pay "+reciver.name+" $"+amount);
+			Village.ui.print(this.name +"does not have enough money to pay "+reciver.name+" $"+amount);
 			this.reportMoney();
 		}
 	}

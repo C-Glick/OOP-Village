@@ -2,6 +2,11 @@ package main;
 
 public class Clock extends Thread{
 	int time;
+	Village village;
+	
+	public Clock (Village village) {
+		this.village = village;
+	}
 	
 	public synchronized void run() {
 		while(true) {
