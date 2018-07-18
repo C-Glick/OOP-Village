@@ -7,11 +7,11 @@ public class Bird extends Villager{
 	}
 
 	public void move() {
-		System.out.println("I am flying");
+		Village.ui.print("I am flying");
 	}
 
 	public void talk() {
-	System.out.println("tweet tweet");
+	Village.ui.print("tweet tweet");
 	}
 	
 

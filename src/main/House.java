@@ -12,13 +12,14 @@ public class House {
 		this.size = size;
 		this.owner = owner;
 		this.cost = cost;
+		Village.houseList.add(this);
 	}
 	
 	public void reportStats() {
-		System.out.println("location: "+street);
-		System.out.println("size: "+size);
-		System.out.println("Owner: " +owner.name);
-		System.out.println("cost: "+cost);
+		Village.ui.print("location: "+street);
+		Village.ui.print("size: "+size);
+		Village.ui.print("Owner: " +owner.name);
+		Village.ui.print("cost: "+cost);
 	}
 	
 

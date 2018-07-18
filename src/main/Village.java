@@ -10,6 +10,7 @@ public class Village {
 	static Mayor mayor;
 	static Clock worldClock;
 	static List<Villager> villagerList;
+	static List<House> houseList;
 	static UserInterface ui;
 
 	public Village(String name, String state) {
@@ -27,14 +28,13 @@ public class Village {
 		worldClock=clock;
 		ui.start();
 		villagerList = new ArrayList<>();
+		houseList = new ArrayList<>();
 		
 		Thread.sleep(500);
 		
 		
-		Villager becky = new Dog("Becky",30, 1000);
+		Mayor mayorBecky = new Mayor("Becky", 30, 10000, 5, 50000, oakheart);
 		Villager tom = new Dog("Tom", 10, 6000);
-		
-		Mayor mayorBecky = new Mayor(becky, 1, 100000, oakheart);
 		
 		mayor.reportStats();
 	
@@ -42,9 +42,9 @@ public class Village {
 		tom.buildHouse("Main", 5000, 5783);
 		tom.reportMoney();
 		
-		becky.buildHouse("1st", 8000, 7000);
+		mayorBecky.buildHouse("1st", 8000, 7000);
 		tom.house.reportStats();
-		mayor.getMayor().house.reportStats();	
+		mayor.house.reportStats();	
 		oakheart.worldClock.printTime();
 	}
 }

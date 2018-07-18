@@ -114,11 +114,23 @@ boolean trace = false;
 					break;
 				case "help" : help();
 					break;
-				case "printTime": print(String.valueOf(village.worldClock.getTime()),false);
+				case "printTime": Village.worldClock.printTime();
 					break;
 				case "trace": toggleTrace();
 					break;
-				default : print(s, false,Color.YELLOW);
+				case "listVillagers": 
+					for (int i=0; i<Village.villagerList.size(); i++) {
+						print(Village.villagerList.get(i).name);
+					}
+					break;
+				case"listObjects":
+					for (int i=0; i<Village.villagerList.size(); i++) {
+						print(Village.villagerList.get(i).name);
+					}
+					break;
+				case "mayor":
+					print(Village.mayor.name);
+					default : print(s, false,Color.YELLOW);
 					break;
 				}
 			}

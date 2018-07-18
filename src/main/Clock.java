@@ -23,7 +23,7 @@ public class Clock extends Thread{
 		return time;
 	}
 	public void printTime() {
-		System.out.println("time: "+time);
+		Village.ui.print("time: " + time);
 	}
 
 }
