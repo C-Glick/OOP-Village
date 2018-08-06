@@ -26,12 +26,10 @@ public class Mayor extends Villager {
 	}
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
 	public void talk() {
-		// TODO Auto-generated method stub
 		
 	}
 	

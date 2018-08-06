@@ -29,6 +29,8 @@ public JTextField input;
 public JScrollPane scrollpane;
 public DefaultStyledDocument document;
 public StyleContext sc;
+public boolean vilInProg;
+public int vilLoopNum;
 
 boolean trace = false;
 
@@ -45,6 +47,10 @@ boolean trace = false;
 	}
 	
 	public void setup () {
+		
+		vilInProg = false;
+		vilLoopNum = 0;
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -105,10 +111,16 @@ boolean trace = false;
 		
 	}
 	public void doCommand(String s) {
+		
+		if (vilInProg) {
+			createVillager(s);
+			s="";
+		}
+		
 		final String[] commands = s.split(" ");				
 		System.out.println(Arrays.toString(commands));
 		try {
-			if (commands.length<=1) {
+			if (commands.length==1) {
 				switch (commands[0]) {
 				case "clear": clear();
 					break;
@@ -130,7 +142,12 @@ boolean trace = false;
 					break;
 				case "mayor":
 					print(Village.mayor.name);
-					default : print(s, false,Color.YELLOW);
+					break;
+				case "newVillager":
+					vilInProg = true;
+					createVillager(s);
+					break;
+				default : print(s, false,Color.YELLOW);
 					break;
 				}
 			}
@@ -151,17 +168,24 @@ boolean trace = false;
 				}
 				
 			}
+			else {
+				//TODO: insert 0 input error
+			}
 			
 		}
 		catch(Exception ex){
 			print("Error -> "+ex.getMessage(), true, Color.RED);
 		}
 	}
+	
 	public void scrollTop() {
 		console.setCaretPosition(0);
 	}
 	public void scrollBottom() {
 		console.setCaretPosition(console.getDocument().getLength());
+	}
+	public void error (String s) {
+		print(s,true,new Color(255,0,0));
 	}
 	public void print (String s) {
 		print(s,false,new Color(255,255,255));
@@ -225,5 +249,46 @@ boolean trace = false;
 			}
 		}
 		return result;
+	}
+	public void createVillager (String s){
+		vilLoopNum ++;
+		String name="";
+		int age=0;
+		int money=0;
+		
+		switch(vilLoopNum) {
+		case 1:
+			print("name:");
+			break;
+		case 2:
+			name = s;
+			break;
+		case 3:
+			print("age:");
+			break;
+		case 4:
+			try {
+				age =Integer.parseInt(s);
+			}catch(Exception e) {
+				error("ERROR: Not an integer");
+			}
+			break;
+		case 5: 
+			print("money:");
+			break;
+		case 6:
+			try {
+				money =Integer.parseInt(s);
+			}catch(Exception e) {
+				error("ERROR: Not an integer");
+			}
+			Dog villager = new Dog(name, age, money);
+			
+			vilInProg = false;
+			vilLoopNum=0;
+			break;
+		default:
+			error("Out of loop, villager creation");
+		}
 	}
 }
