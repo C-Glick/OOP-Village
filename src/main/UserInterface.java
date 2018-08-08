@@ -31,6 +31,9 @@ public DefaultStyledDocument document;
 public StyleContext sc;
 public boolean vilInProg;
 public int vilLoopNum;
+String newName;
+int newAge;
+int newMoney;
 
 boolean trace = false;
 
@@ -82,7 +85,7 @@ boolean trace = false;
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					String text = input.getText();
-					if (text.length() > 1) {
+					if (text.length() > 0) {
 						doCommand(text);
 						scrollBottom();
 						input.selectAll();
@@ -112,13 +115,14 @@ boolean trace = false;
 	}
 	public void doCommand(String s) {
 		
-		if (vilInProg) {
-			createVillager(s);
-			s="";
-		}
-		
 		final String[] commands = s.split(" ");				
 		System.out.println(Arrays.toString(commands));
+		
+		if (vilInProg) {
+			createVillager(commands);
+			return;
+		}
+		
 		try {
 			if (commands.length==1) {
 				switch (commands[0]) {
@@ -145,7 +149,7 @@ boolean trace = false;
 					break;
 				case "newVillager":
 					vilInProg = true;
-					createVillager(s);
+					createVillager(commands);
 					break;
 				default : print(s, false,Color.YELLOW);
 					break;
@@ -250,39 +254,38 @@ boolean trace = false;
 		}
 		return result;
 	}
-	public void createVillager (String s){
+	public void createVillager (String[] commands){
 		vilLoopNum ++;
-		String name="";
-		int age=0;
-		int money=0;
+	
 		
 		switch(vilLoopNum) {
 		case 1:
 			print("name:");
 			break;
 		case 2:
-			name = s;
+			newName = commands[0];
+			print("age:");
 			break;
 		case 3:
-			print("age:");
+			try {
+				newAge =Integer.parseInt(commands[0]);
+			}catch(Exception e) {
+				error("ERROR: Not an integer");
+				vilLoopNum--;
+				break;
+			}
+			print("money:");
 			break;
 		case 4:
 			try {
-				age =Integer.parseInt(s);
+				newMoney =Integer.parseInt(commands[0]);
 			}catch(Exception e) {
 				error("ERROR: Not an integer");
+				vilLoopNum--;
+				break;
 			}
-			break;
-		case 5: 
-			print("money:");
-			break;
-		case 6:
-			try {
-				money =Integer.parseInt(s);
-			}catch(Exception e) {
-				error("ERROR: Not an integer");
-			}
-			Dog villager = new Dog(name, age, money);
+			Dog villager = new Dog(newName, newAge, newMoney);
+			print("new dog villager created with name "+newName+", age of "+newAge+", and has $"+newMoney);
 			
 			vilInProg = false;
 			vilLoopNum=0;
