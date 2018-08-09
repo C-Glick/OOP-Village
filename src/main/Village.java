@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Village {
@@ -45,6 +44,6 @@ public class Village {
 		mayorBecky.buildHouse("1st", 8000, 7000);
 		tom.house.reportStats();
 		mayor.house.reportStats();	
-		oakheart.worldClock.printTime();
+		Village.worldClock.printTime();
 	}
 }
